@@ -39,10 +39,9 @@ async def check_answer(mes: Message, state: FSMContext, redis: Redis):
         team_data = json.dumps({"team": data["team"], "answer": "+"})
         await redis.rpush("teams_data", team_data)
         await mes.answer(
-            "Абсолютно точно! Именно свет может просочиться в какое-либо отверстие!"
+            "Абсолютно точно! Ваша миссия выполнена!"
         )
         await mes.answer(
-            "На этой прекрасной ноте нам нужно попращаться :(\n"
             "Желаю успехов в вашем приключении, до скорых встреч!"
         )
         await state.clear()
