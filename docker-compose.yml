@@ -6,8 +6,6 @@ services:
     image: bot-special-agent
     env_file:
       - .env
-    ports:
-      - "127.0.0.1:8000:8000"
     depends_on:
       - redis-special-agent
     networks:
