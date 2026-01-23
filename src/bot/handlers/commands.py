@@ -12,9 +12,9 @@ router = Router()
 async def start_command(mes: Message, state: FSMContext):
     await state.set_state(TeamProcess.team)
     await mes.answer(
-        "Привет, <b>Спецагенты</b>!\n"
+        "Привет, <b>Эрудиты</b>!\n"
         "Я агент-бот под прикрытием, мой позывной <b>R7</b>!\n"
-        "Сообщите название вашего отряда:"
+        "Сообщите название вашей команды:"
     )
 
 
