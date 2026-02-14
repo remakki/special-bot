@@ -21,12 +21,15 @@ async def process_team(mes: Message, state: FSMContext):
     await state.update_data(team=team, attempt=1)
     await state.set_state(TeamProcess.answer)
     await mes.answer(
-        "Для вас у меня есть <b>бонусный вопрос</b>!\n"
-        "На ответ у вас будет 2 попытки, поэтому будьте внимательны!\n"
-        "Ответ напишите мне в чат, а я проверю.\n"
-        "Итак, к вопросу:"
+        "Введите ответ на секретный вопрос:"
     )
-    await mes.answer("<b>Из какого известного мультфильма фраза, которую вам удалось собрать?</b>")
+    # await mes.answer(
+    #     "Для вас у меня есть <b>бонусный вопрос</b>!\n"
+    #     "На ответ у вас будет 2 попытки, поэтому будьте внимательны!\n"
+    #     "Ответ напишите мне в чат, а я проверю.\n"
+    #     "Итак, к вопросу:"
+    # )
+    # await mes.answer("<b>Из какого известного мультфильма фраза, которую вам удалось собрать?</b>")
 
 
 @router.message(StateFilter(TeamProcess.answer))
@@ -35,7 +38,7 @@ async def check_answer(mes: Message, state: FSMContext, redis: Redis):
     attempt = int(await state.get_value("attempt"))
     data = await state.get_data()
 
-    if answer == "головоломка":
+    if answer in ["люди x", "люди икс", "люди x"]:
         team_data = json.dumps({"team": data["team"], "answer": "+"})
         await redis.rpush("teams_data", team_data)
         await mes.answer(
